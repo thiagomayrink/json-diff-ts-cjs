@@ -1,19 +1,10 @@
-# json-diff-ts
-
-![Master CI/Publish](https://github.com/ltwlf/json-diff-ts/workflows/Master%20CI/Publish/badge.svg)
-[![Known Vulnerabilities](https://snyk.io/test/github/ltwlf/json-diff-ts/badge.svg?targetFile=package.json)](https://snyk.io/test/github/ltwlf/json-diff-ts?targetFile=package.json)
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=ltwlf_json-diff-ts&metric=alert_status)](https://sonarcloud.io/dashboard?id=ltwlf_json-diff-ts)
-
-`json-diff-ts` is a TypeScript library that calculates and applies differences between JSON objects. A standout feature is its ability to identify elements in arrays using keys instead of indices, which offers a more intuitive way to handle arrays. It also supports JSONPath, a query language for JSON, which enables you to target specific parts of a JSON document with precision.
-
-Another significant feature of this library is its ability to transform changesets into atomic changes. This means that each change in the data can be isolated and applied independently, providing a granular level of control over the data manipulation process.
-
-This library is particularly valuable for applications where tracking changes in JSON data is crucial. It simplifies the process of comparing JSON objects and applying changes. The support for key-based array identification can be especially useful in complex JSON structures where tracking by index is not efficient or intuitive. JSONPath support further enhances its capabilities by allowing precise targeting of specific parts in a JSON document, making it a versatile tool for handling JSON data.
+# json-diff-ts-cjs
+Forked from: [json-dif-ts](https://github.com/ltwlf/json-diff-ts.git) and compiled to CommonJS;
 
 ## Installation
 
 ```sh
-npm install json-diff-ts
+npm install json-diff-ts-cjs
 ```
 
 ## Capabilities
@@ -237,31 +228,10 @@ const value = jsonPath.query(data, '$.characters[?(@.id=="LUK")].name');
 expect(value).to.eql(['Luke Skywalker']);
 ```
 
-## Contributing
-
-Contributions are welcome! Please follow the provided issue templates and code of conduct.
-
-## Contact
-
-Reach out to the maintainer via LinkedIn or Twitter:
-
+## Acknowledgments
+Forked from:  [json-dif-ts](https://github.com/ltwlf/json-diff-ts.git)
 - LinkedIn: [Christian Glessner](https://www.linkedin.com/in/christian-glessner/)
 - Twitter: [@leitwolf_io](https://twitter.com/leitwolf_io)
-
-Discover more about the company behind this project: [hololux](https://hololux.com)
-
-## Release Notes
-
-- **v2.2.0:** Fix lodash-es decependency, exclude keys, compare string arrays by value
-- **v2.1.0:** Resolves a problem related to JSON Path filters by replacing the single equal sign (=) with a double equal sign (==). This update maintains compatibility with existing flat changes. Allows to use either '' or '.' as root in the path.
-- **v2.0.0:** json-diff-ts has been upgraded to an ECMAScript module! This major update brings optimizations and enhanced documentation. Additionally, a previously existing issue where all paths were treated as regex has been fixed. In this new version, you'll need to use a Map instead of a Record for regex paths. Please note that this is a breaking change if you were using regex paths in the previous versions.
-- **v1.2.6:** Enhanced JSON Path handling for period-inclusive segments.
-- **v1.2.5:** Patched dependencies; added key name resolution support for key functions.
-- **v1.2.4:** Documentation updates; upgraded TypeScript and Lodash.
-- **v1.2.3:** Dependency updates; switched to TypeScript 4.5.2.
-- **v1.2.2:** Implemented object key resolution functions support.
-
-## Acknowledgments
 
 This project takes inspiration and code from [diff-json](https://www.npmjs.com/package/diff-json) by viruschidai@gmail.com.
 
