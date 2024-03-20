@@ -1,4 +1,4 @@
-import { difference, find, intersection, keyBy } from 'lodash-es';
+const _ = require('lodash');
 
 type FunctionKey = (obj: any, shouldReturnKeyName?: boolean) => any;
 export type EmbeddedObjKeysType = Record<string, string | FunctionKey>;
@@ -73,7 +73,7 @@ export function diff(
  */
 export const applyChangeset = (obj: any, changeset: Changeset) => {
   if (changeset) {
-    changeset.forEach((change) => {
+    changeset.forEach((change: IChange) => {
       const { type, key, value, embeddedKey } = change;
 
       if ((value !== null && value !== undefined) || type === Operation.REMOVE) {
@@ -130,7 +130,7 @@ export const flattenChangeset = (
   embeddedKey?: string | FunctionKey
 ): IFlatChange[] => {
   if (Array.isArray(obj)) {
-    return obj.reduce((memo, change) => [...memo, ...flattenChangeset(change, path, embeddedKey)], [] as IFlatChange[]);
+    return obj.reduce((memo: IFlatChange[], change: IChange) => [...memo, ...flattenChangeset(change, path, embeddedKey)], [] as IFlatChange[]);
   } else {
     if (obj.changes || embeddedKey) {
       if (embeddedKey) {
@@ -189,7 +189,7 @@ export const unflattenChanges = (changes: IFlatChange | IFlatChange[]) => {
 
   const changesArr: IChange[] = [];
 
-  changes.forEach((change) => {
+  changes.forEach((change: IFlatChange) => {
     const obj = {} as IChange;
     let ptr = obj;
 
@@ -383,7 +383,7 @@ const compareObject = (
   const oldObjKeys = Object.keys(oldObj).filter((key) => keysToSkip.indexOf(key) === -1);
   const newObjKeys = Object.keys(newObj).filter((key) => keysToSkip.indexOf(key) === -1);
 
-  const intersectionKeys = intersection(oldObjKeys, newObjKeys);
+  const intersectionKeys: string[] = _.intersection(oldObjKeys, newObjKeys);
   for (k of intersectionKeys) {
     newPath = path.concat([k]);
     newKeyPath = skipPath ? keyPath : keyPath.concat([k]);
@@ -393,7 +393,7 @@ const compareObject = (
     }
   }
 
-  const addedKeys = difference(newObjKeys, oldObjKeys);
+  const addedKeys: string[] = _.difference(newObjKeys, oldObjKeys);
   for (k of addedKeys) {
     newPath = path.concat([k]);
     newKeyPath = skipPath ? keyPath : keyPath.concat([k]);
@@ -404,7 +404,7 @@ const compareObject = (
     });
   }
 
-  const deletedKeys = difference(oldObjKeys, newObjKeys);
+  const deletedKeys: string[] = _.difference(oldObjKeys, newObjKeys);
   for (k of deletedKeys) {
     newPath = path.concat([k]);
     newKeyPath = skipPath ? keyPath : keyPath.concat([k]);
@@ -475,7 +475,7 @@ const convertArrayToObj = (arr: any[], uniqKey: any) => {
       obj[value] = value;
     });
   } else if (uniqKey !== '$index') {
-    obj = keyBy(arr, uniqKey);
+    obj = _.keyBy(arr, uniqKey);
   } else {
     for (let i = 0; i < arr.length; i++) {
       const value = arr[i];
@@ -569,7 +569,7 @@ const applyArrayChange = (arr: any, change: any) =>
             element = arr[index];
           }
         } else {
-          element = find(arr, (el) => el[change.embeddedKey]?.toString() === subchange.key.toString());
+          element = _.find(arr, (el: any) => el[change.embeddedKey]?.toString() === subchange.key.toString());
         }
         result.push(applyChangeset(element, subchange.changes));
       }
@@ -608,7 +608,7 @@ const revertArrayChange = (arr: any, change: any) =>
         if (change.embeddedKey === '$index') {
           element = arr[+subchange.key];
         } else {
-          element = find(arr, (el) => el[change.embeddedKey].toString() === subchange.key);
+          element = _.find(arr, (el: any) => el[change.embeddedKey].toString() === subchange.key);
         }
         result.push(revertChangeset(element, subchange.changes));
       }

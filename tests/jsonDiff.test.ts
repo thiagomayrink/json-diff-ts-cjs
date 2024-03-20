@@ -1,4 +1,3 @@
-import _ from 'lodash-es';
 import {
   applyChangeset,
   diff,
@@ -9,6 +8,7 @@ import {
   unflattenChanges
 } from '../src/jsonDiff';
 import * as fixtures from './__fixtures__/jsonDiff.fixture';
+const _ = require('lodash');
 
 let oldObj: any;
 let newObj: any;
