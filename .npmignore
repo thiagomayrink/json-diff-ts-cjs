@@ -1,0 +1,4 @@
+tests/
+.vscode/
+.github/
+coverage
