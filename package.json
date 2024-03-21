@@ -25,7 +25,7 @@
     "url": "git+https://github.com/thiagomayrink/json-diff-ts-cjs.git"
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
+    "registry": "https://registry.npmjs.org"
   },
   "contributors": [
     "Christian Glessner",
