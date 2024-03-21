@@ -130,7 +130,10 @@ export const flattenChangeset = (
   embeddedKey?: string | FunctionKey
 ): IFlatChange[] => {
   if (Array.isArray(obj)) {
-    return obj.reduce((memo: IFlatChange[], change: IChange) => [...memo, ...flattenChangeset(change, path, embeddedKey)], [] as IFlatChange[]);
+    return obj.reduce(
+      (memo: IFlatChange[], change: IChange) => [...memo, ...flattenChangeset(change, path, embeddedKey)],
+      [] as IFlatChange[]
+    );
   } else {
     if (obj.changes || embeddedKey) {
       if (embeddedKey) {

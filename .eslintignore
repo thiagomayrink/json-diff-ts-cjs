@@ -1,0 +1,40 @@
+# compiled output
+dist
+node_modules
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# Tests
+/coverage
+/.nyc_output
+
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+*.sublime-workspace
+
+# Build files & directories
+
+.build
+.esbuild
+.devcontainer
+.localstack
+.serverless
+.webpack
+
+# Env files
+.env
+.env.*
+
+# Other lock files
+yarn.lock
+pnpm-lock.yaml
